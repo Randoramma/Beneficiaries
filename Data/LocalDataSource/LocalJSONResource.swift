@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 /// Protocol for objects reading Beneficiary from local file
-/// - Requires Combine Framwork
+/// - Requires Combine Framework
 ///  - Note: Should be Generic type to allow for varying object arrays to be read.
 protocol JSONFileReadable {
     func fetchBeneficiaries() -> AnyPublisher<[Beneficiary], Error>
