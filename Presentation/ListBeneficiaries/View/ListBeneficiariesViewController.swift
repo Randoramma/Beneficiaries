@@ -39,20 +39,20 @@ final class ListBeneficiariesViewController: UIViewController {
     // - MARK:  Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindViewModel()
-        setupActivityIndicator()
-        viewModel.viewDidLoad()
-        setupViews()
+        self.bindViewModel()
+        self.setupActivityIndicator()
+        self.viewModel.viewDidLoad()
+        self.setupViews()
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), // handling the notch
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            self.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), // handling the notch
+            self.tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            self.tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
-        tableView.dataSource = self
-        tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
     }
     
     deinit {
@@ -61,11 +61,11 @@ final class ListBeneficiariesViewController: UIViewController {
 
     // - MARK: UI Setup
     private func setupViews() {
-        tableView.estimatedRowHeight = Constraints.estimatedRowHeight
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(BenefitsListItemTableViewCell.self, forCellReuseIdentifier: BenefitsListItemTableViewCell.reuseIdentifier)
+        self.tableView.estimatedRowHeight = Constraints.estimatedRowHeight
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.register(BenefitsListItemTableViewCell.self, forCellReuseIdentifier: BenefitsListItemTableViewCell.reuseIdentifier)
         
-        view.addSubview(tableView)
+        view.addSubview(self.tableView)
         view.backgroundColor = .systemBackground
         title = GlobalConstants.beneficiariesTitle
         configureNavigationBar()
@@ -105,7 +105,7 @@ final class ListBeneficiariesViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
                 self.tearDownActivityIndicator()
                 if let error {
-                    showAlert(withMessage: error.debugDescription)
+                    self.showAlert(withMessage: error.debugDescription)
                 }
         }.store(in: &cancellables)
     }
@@ -141,12 +141,12 @@ extension ListBeneficiariesViewController: UITableViewDelegate, UITableViewDataS
             fatalError("Invalid Reuse identifier for BenefitsListItemTableViewCell")
         }
         
-        configureCellAt(indexPath, cell)
+        self.configureCellAt(indexPath, cell)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showDetailModal(for: viewModel, at: indexPath.row)
+        self.showDetailModal(for: viewModel, at: indexPath.row)
     }
     
     fileprivate func configureCellAt(_ indexPath: IndexPath, _ cell: BenefitsListItemTableViewCell) {
@@ -163,29 +163,29 @@ extension ListBeneficiariesViewController: UITableViewDelegate, UITableViewDataS
 extension ListBeneficiariesViewController {
     
     private func setupActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView(style: .large)
-             activityIndicator.color = .gray
-             activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-             view.addSubview(activityIndicator)
+        self.activityIndicator = UIActivityIndicatorView(style: .large)
+        self.activityIndicator.color = .gray
+        self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self.activityIndicator)
         
-           overlay.translatesAutoresizingMaskIntoConstraints = false
-           overlay.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-           view.addSubview(overlay)
-           overlay.addSubview(activityIndicator)
+        self.overlay.translatesAutoresizingMaskIntoConstraints = false
+        self.overlay.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.addSubview(self.overlay)
+        self.overlay.addSubview(self.activityIndicator)
            
        NSLayoutConstraint.activate([
-           overlay.topAnchor.constraint(equalTo: view.topAnchor),
-           overlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-           overlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-           overlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        self.overlay.topAnchor.constraint(equalTo: view.topAnchor),
+        self.overlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        self.overlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        self.overlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
            
-           activityIndicator.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
-           activityIndicator.centerYAnchor.constraint(equalTo: overlay.centerYAnchor)
+        self.activityIndicator.centerXAnchor.constraint(equalTo: self.overlay.centerXAnchor),
+        self.activityIndicator.centerYAnchor.constraint(equalTo: self.overlay.centerYAnchor)
        ])
     }
     
     private func tearDownActivityIndicator() {
-        activityIndicator.removeFromSuperview()
-        overlay.removeFromSuperview()
+        self.activityIndicator.removeFromSuperview()
+        self.overlay.removeFromSuperview()
     }
 }

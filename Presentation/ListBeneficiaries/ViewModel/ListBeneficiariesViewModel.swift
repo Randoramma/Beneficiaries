@@ -42,20 +42,20 @@ final class ListBeneficiariesViewModel: ListBeneficiariesViewable {
     }
 
     private func reload() {
-        resetData()
-        loadData()
+        self.resetData()
+        self.loadData()
     }
     
     private func resetData() {
-        items.removeAll()
-        content = .empty
+        self.items.removeAll()
+        self.content = .empty
     }
     
     /// This is loading the data from the use case into the view model seperating the presentation layer from the data layer.
     /// - Note: the finished block is not being used because fetch handles the response via map.  Can be expanded later. 
     private func loadData() {
-        content = .loading
-        listBeneficiariesUseCase.fetch()
+        self.content = .loading
+        self.listBeneficiariesUseCase.fetch()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self = self else { return }
@@ -76,21 +76,21 @@ final class ListBeneficiariesViewModel: ListBeneficiariesViewable {
     }
     
     private func update(_ beneficiaries: [Beneficiary]) {
-        items = beneficiaries
-        updateContent()
+        self.items = beneficiaries
+        self.updateContent()
     }
     
     private func updateContent() {
-        content = items.isEmpty ? .empty : .items(items)
+        self.content = items.isEmpty ? .empty : .items(items)
     }
     
     deinit {
-        cancellables.removeAll()
+        self.cancellables.removeAll()
     }
 }
 
 extension ListBeneficiariesViewModel: ListBeneficiariesViewModelInput {
     func viewDidLoad() {
-        reload()
+        self.reload()
     }
 }

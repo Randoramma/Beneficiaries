@@ -43,10 +43,10 @@ final class BeneficiaryDetailModalViewController: UIViewController {
     // - MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        setupStackView()
-        setupLabels()
-        setupCloseButton()
+        self.setupView()
+        self.setupStackView()
+        self.setupLabels()
+        self.setupCloseButton()
     }
     
     // - MARK: UI Setup
@@ -55,17 +55,17 @@ final class BeneficiaryDetailModalViewController: UIViewController {
     }
 
     private func setupStackView() {
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .fill
-        stackView.spacing = Constraints.verticalSpaceConstraint
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stackView)
+        self.stackView.axis = .vertical
+        self.stackView.distribution = .equalSpacing
+        self.stackView.alignment = .fill
+        self.stackView.spacing = Constraints.verticalSpaceConstraint
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self.stackView)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constraints.leadingAnchorConstraint),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constraints.trailingAnchorConstraint),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            self.stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constraints.leadingAnchorConstraint),
+            self.stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constraints.trailingAnchorConstraint),
+            self.stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 
@@ -76,15 +76,15 @@ final class BeneficiaryDetailModalViewController: UIViewController {
             $0.numberOfLines = 0
             $0.font = .preferredFont(forTextStyle: .body)
             $0.textColor = .label
-            stackView.addArrangedSubview($0)
+            self.stackView.addArrangedSubview($0)
         }
     }
 
     private func setupCloseButton() {
-        closeButton.setTitle(GlobalConstants.closeButtonTitle, for: .normal)
-        closeButton.tintColor = .label
-        closeButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
-        stackView.addArrangedSubview(closeButton)
+        self.closeButton.setTitle(GlobalConstants.closeButtonTitle, for: .normal)
+        self.closeButton.tintColor = .label
+        self.closeButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
+        self.stackView.addArrangedSubview(closeButton)
     }
 
     @objc private func dismissModal() {
@@ -92,13 +92,13 @@ final class BeneficiaryDetailModalViewController: UIViewController {
     }
 
     func configure() {
-        lastNameLabel.text = "\(GlobalConstants.lastNameTitle): \(self.viewModel.model.lastName)"
-        firstNameLabel.text = "\(GlobalConstants.firstNameTitle): \(self.viewModel.model.firstName)"
-        beneTypeLabel.text = "\(GlobalConstants.beneficiaryTypeTitle): \(self.viewModel.model.beneType)"
-        designationCodeLabel.text = "\(GlobalConstants.designationCodeTitle): \(self.viewModel.model.designationCode)"
-        ssnLabel.text = "\(GlobalConstants.socialSecurityNumberTitle): \(self.viewModel.model.ssn)"
-        dobLabel.text = "\(GlobalConstants.dateOfBirthTitle): \(self.viewModel.model.dob)"
-        phoneNumberLabel.text = "\(GlobalConstants.phoneNumberTitle): \(self.viewModel.model.phoneNumber)"
-        addressLabel.text = "\(GlobalConstants.addressTitle): \(self.viewModel.model.address)"
+        self.lastNameLabel.text = "\(GlobalConstants.lastNameTitle): \(self.viewModel.model.lastName)"
+        self.firstNameLabel.text = "\(GlobalConstants.firstNameTitle): \(self.viewModel.model.firstName)"
+        self.beneTypeLabel.text = "\(GlobalConstants.beneficiaryTypeTitle): \(self.viewModel.model.beneType)"
+        self.designationCodeLabel.text = "\(GlobalConstants.designationCodeTitle): \(self.viewModel.model.designationCode)"
+        self.ssnLabel.text = "\(GlobalConstants.socialSecurityNumberTitle): \(self.viewModel.model.ssn)"
+        self.dobLabel.text = "\(GlobalConstants.dateOfBirthTitle): \(self.viewModel.model.dob)"
+        self.phoneNumberLabel.text = "\(GlobalConstants.phoneNumberTitle): \(self.viewModel.model.phoneNumber)"
+        self.addressLabel.text = "\(GlobalConstants.addressTitle): \(self.viewModel.model.address)"
     }
 }

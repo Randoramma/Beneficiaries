@@ -23,7 +23,7 @@ final class ListBeneficiariesCoordinator {
     }
     
     func start() {
-        let viewController = dependencies.makeListBeneficiariesViewController()
-        navigationController?.pushViewController(viewController, animated: false)
+        let viewController = self.dependencies.makeListBeneficiariesViewController()
+        self.navigationController?.pushViewController(viewController, animated: false)
     }
 }

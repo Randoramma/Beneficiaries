@@ -16,12 +16,12 @@ final class BenefitsListItemTableViewCell: UITableViewCell {
     // - MARK: Initializers
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupViewLayout()
+        self.setupViewLayout()
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViewLayout()
+        self.setupViewLayout()
     }
     
     // - MARK: Label Constructors
@@ -56,10 +56,10 @@ final class BenefitsListItemTableViewCell: UITableViewCell {
     // - MARK: View Setup
     private lazy var benefitsListMainVerticalStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            beneficiaryFirstNameLabel,
-            beneficiaryLastNameLabel,
-            beneficiaryTypeLabel,
-            beneficiaryDesignationTypeLabel
+            self.beneficiaryFirstNameLabel,
+            self.beneficiaryLastNameLabel,
+            self.beneficiaryTypeLabel,
+            self.beneficiaryDesignationTypeLabel
         ])
         
         stack.axis = .vertical
@@ -68,31 +68,31 @@ final class BenefitsListItemTableViewCell: UITableViewCell {
     }()
     
     private func setupViewLayout() {
-        contentView.addSubview(benefitsListMainVerticalStack)
-        benefitsListMainVerticalStack.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(self.benefitsListMainVerticalStack)
+        self.benefitsListMainVerticalStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            benefitsListMainVerticalStack.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-            benefitsListMainVerticalStack.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
-            benefitsListMainVerticalStack.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-            benefitsListMainVerticalStack.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
+            self.benefitsListMainVerticalStack.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            self.benefitsListMainVerticalStack.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
+            self.benefitsListMainVerticalStack.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+            self.benefitsListMainVerticalStack.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
         ])
     }
     
     func configure(_ model: BeneficiariesListCellItemViewModel) {
-        beneficiaryLastNameLabel.text = model.model.lastName
-        beneficiaryFirstNameLabel.text = model.model.firstName
-        beneficiaryTypeLabel.text = "\(GlobalConstants.beneficiaryTypeTitle): \(model.model.beneType)"
-        beneficiaryDesignationTypeLabel.text = "\(GlobalConstants.designationCodeTitle): \(model.model.designationCode)"
+        self.beneficiaryLastNameLabel.text = model.model.lastName
+        self.beneficiaryFirstNameLabel.text = model.model.firstName
+        self.beneficiaryTypeLabel.text = "\(GlobalConstants.beneficiaryTypeTitle): \(model.model.beneType)"
+        self.beneficiaryDesignationTypeLabel.text = "\(GlobalConstants.designationCodeTitle): \(model.model.designationCode)"
     }
     
     // - MARK: LifeCycle
     override func prepareForReuse() {
         super.prepareForReuse()
-        beneficiaryDesignationTypeLabel.text = nil
-        beneficiaryTypeLabel.text = nil
-        beneficiaryFirstNameLabel.text = nil
-        beneficiaryLastNameLabel.text = nil
+        self.beneficiaryDesignationTypeLabel.text = nil
+        self.beneficiaryTypeLabel.text = nil
+        self.beneficiaryFirstNameLabel.text = nil
+        self.beneficiaryLastNameLabel.text = nil
     }
 }
 
